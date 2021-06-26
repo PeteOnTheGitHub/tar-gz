@@ -1,0 +1,45 @@
+{
+  "name": "tar-gz",
+  "version": "1.0.0",
+  "description": "Pack, unpack and modify, .tgz (.tar.gz) files in browser",
+  "browser": "index.min.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "start": "budo index.ts:index.js --live -- -t [ rollupify -n GzipTarball ] -p [ tsify ] --serve index.js --standalone GzipTarball",
+    "build": "browserify index.ts -t rollupify -p [ tsify ] --standalone GzipTarball | uglifyjs -c > index.min.js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "test": "jest",
+    "test:coverage": "cross-env TEST_REPORT_PATH=./test/ jest --testResultsProcessor=./node_modules/jest-junit-reporter --coverage  && npx juice ./test/lcov-report/index.html ./test/index.html"
+  },
+  "files": [
+    "index.min.js",
+    "index.d.ts"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "concat-stream": "^1.6.2",
+    "filereader-stream": "^2.0.0",
+    "gunzip-maybe": "^1.4.1",
+    "stream": "0.0.2",
+    "stream-to-array": "^2.3.0",
+    "tar-stream": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/concat-stream": "^1.6.0",
+    "@types/jest": "^23.3.2",
+    "@types/node": "^10.10.1",
+    "@types/pako": "^1.0.0",
+    "@types/stream-to-array": "^2.3.0",
+    "@types/tar-stream": "^1.6.0",
+    "budo": "^11.3.2",
+    "cross-env": "^5.2.0",
+    "jest": "^23.6.0",
+    "jest-junit-reporter": "^1.1.0",
+    "node-typescript-compiler": "^1.1.1",
+    "npx": "^9.7.1",
+    "rollupify": "^0.5.0",
+    "ts-jest": "^23.10.0",
+    "tsify": "^4.0.0",
+    "typescript": "^3.0.3"
+  }
+}

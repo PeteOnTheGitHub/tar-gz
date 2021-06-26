@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GzipTarball Example</title>
+</head>
+<body>
+    <h2>Load in script tag</h2>
+    <input id="file2" type="file" />
+    <div id="output2"></div>
+    <script src="index.js"></script>
+    <script>
+        console.log(GzipTarball)
+        var input = document.getElementById("file2");
+        var ouput = document.getElementById("output2");
+        input.addEventListener("change", function(event) {
+            var gzipTarball = new GzipTarball(event.target.files[0]);
+            gzipTarball.getFiles().then((files) => {
+                ouput.innerHTML = JSON.stringify(files);
+            })
+        });
+    </script>
+
+    <h2>Load in requirejs (AMD)</h2>
+    <input id="file" type="file" />
+    <div id="output"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script>
+        require(['index.js'], function(RequireGzipTarball) {
+            console.log(RequireGzipTarball)
+            var input = document.getElementById("file");
+            var ouput = document.getElementById("output");
+            input.addEventListener("change", function(event) {
+                var gzipTarball = new RequireGzipTarball(event.target.files[0]);
+                gzipTarball.getFiles().then((files) => {
+                    ouput.innerHTML = JSON.stringify(files);
+                })
+            });
+        })
+    </script>
+</body>
+</html>

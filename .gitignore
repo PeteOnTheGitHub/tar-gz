@@ -1,0 +1,8 @@
+node_modules
+test
+.idea
+npm-pack.copy.tgz
+index.min.js
+index.test.d.ts
+.rpt2_cache
+.vscode
